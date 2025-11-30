@@ -29,5 +29,8 @@ class Config:
     CLOUDINARY_API_KEY = os.getenv('CLOUDINARY_API_KEY', '')
     CLOUDINARY_API_SECRET = os.getenv('CLOUDINARY_API_SECRET', '')
     
-    # CORS - Allow multiple frontend ports during development
+    # CORS - Allow multiple frontend ports during development and production
     CORS_ORIGINS = os.getenv('CORS_ORIGINS', 'http://localhost:5173,http://localhost:5174,http://localhost:3000,http://127.0.0.1:5173,http://127.0.0.1:5174').split(',')
+    
+    # JWT Secret for custom auth
+    JWT_SECRET = os.getenv('JWT_SECRET', 'nls-studio-secret-key-change-in-production')
