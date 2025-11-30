@@ -8,7 +8,7 @@ const useAuthStore = create(
       user: null,
       token: null,
       isAuthenticated: false,
-      isLoading: true,
+      isLoading: false,
 
       setAuth: (user, token) => {
         set({
@@ -98,7 +98,13 @@ const useAuthStore = create(
         user: state.user,
         token: state.token,
         isAuthenticated: state.isAuthenticated
-      })
+      }),
+      onRehydrateStorage: () => (state) => {
+        // When state is loaded from localStorage, ensure isLoading is false
+        if (state) {
+          state.isLoading = false
+        }
+      }
     }
   )
 )
