@@ -1,0 +1,308 @@
+================================================================================
+                        HƯỚNG DẪN SỬ DỤNG NLS STUDIO
+                     Hệ Thống Quản Lý Học Tập Trực Tuyến
+================================================================================
+
+Chào mừng bạn đến với NLS Studio! Đây là hướng dẫn sử dụng dành cho học viên,
+giảng viên và quản trị viên.
+
+--------------------------------------------------------------------------------
+                              MỤC LỤC
+--------------------------------------------------------------------------------
+
+1. ĐĂNG NHẬP VÀ ĐĂNG XUẤT
+2. DÀNH CHO HỌC VIÊN (STUDENT)
+3. DÀNH CHO GIẢNG VIÊN (TEACHER)
+4. DÀNH CHO QUẢN TRỊ VIÊN (ADMIN)
+5. CÂU HỎI THƯỜNG GẶP
+6. LIÊN HỆ HỖ TRỢ
+
+================================================================================
+                        1. ĐĂNG NHẬP VÀ ĐĂNG XUẤT
+================================================================================
+
+ĐĂNG NHẬP:
+----------
+1. Truy cập website NLS Studio
+2. Nhập Email và Mật khẩu được cấp
+3. Nhấn nút "Đăng nhập"
+4. Nếu thành công, bạn sẽ được chuyển đến trang Dashboard
+
+LƯU Ý: Nếu bạn chưa có tài khoản, hãy liên hệ Quản trị viên để được cấp.
+
+ĐĂNG XUẤT:
+----------
+1. Nhấn vào tên/avatar của bạn ở góc trên bên phải
+2. Chọn "Đăng xuất"
+3. Bạn sẽ được chuyển về trang đăng nhập
+
+ĐỔI MẬT KHẨU:
+-------------
+1. Vào trang "Hồ sơ" (Profile)
+2. Tìm mục "Đổi mật khẩu"
+3. Nhập mật khẩu hiện tại
+4. Nhập mật khẩu mới (2 lần để xác nhận)
+5. Nhấn "Cập nhật"
+
+================================================================================
+                     2. DÀNH CHO HỌC VIÊN (STUDENT)
+================================================================================
+
+A. TRANG DASHBOARD (Tổng quan)
+------------------------------
+Khi đăng nhập, bạn sẽ thấy:
+- Các lớp học bạn đang tham gia
+- Bài tập sắp đến hạn
+- Lịch học hôm nay
+
+B. XEM CÁC LỚP HỌC
+------------------
+1. Nhấn "Lớp học" ở menu bên trái
+2. Bạn sẽ thấy danh sách các lớp đang tham gia
+3. Nhấn vào tên lớp để xem chi tiết
+
+C. XEM NỘI DUNG KHÓA HỌC
+------------------------
+Trong trang chi tiết lớp học:
+
+1. Tab "Khóa học" (Courses):
+   - Xem danh sách các module/chương
+   - Nhấn vào module để mở rộng xem tài liệu
+   - Nhấn vào tên tài liệu để tải về hoặc xem
+
+2. Tab "Bài tập" (Assignments):
+   - Xem danh sách bài tập được giao
+   - Xem hạn nộp (deadline)
+   - Nhấn vào bài tập để nộp bài
+
+3. Tab "Bài kiểm tra" (Quizzes):
+   - Xem danh sách bài kiểm tra
+   - Nhấn "Làm bài" để bắt đầu
+   - Xem điểm sau khi hoàn thành
+
+D. NỘP BÀI TẬP
+--------------
+1. Vào lớp học → Tab "Bài tập"
+2. Nhấn vào bài tập cần nộp
+3. Đọc kỹ yêu cầu bài tập
+4. Nhấn "Chọn file" để tải lên bài làm
+5. Nhấn "Nộp bài"
+6. Chờ thông báo "Nộp bài thành công"
+
+LƯU Ý:
+- Kiểm tra hạn nộp trước khi làm bài
+- Định dạng file được hỗ trợ: PDF, DOC, DOCX, TXT, hình ảnh
+- Có thể nộp lại nhiều lần (bài mới sẽ thay thế bài cũ)
+
+E. LÀM BÀI KIỂM TRA (QUIZ)
+--------------------------
+1. Vào lớp học → Tab "Bài kiểm tra"
+2. Nhấn "Làm bài" ở bài kiểm tra muốn làm
+3. Đọc từng câu hỏi và chọn đáp án
+4. Nhấn "Tiếp theo" để sang câu tiếp
+5. Nhấn "Nộp bài" khi hoàn thành
+6. Xem điểm và đáp án đúng
+
+LƯU Ý:
+- Một số bài kiểm tra có giới hạn thời gian
+- Không thể làm lại sau khi đã nộp bài
+- Điểm được tính tự động
+
+F. XEM LỊCH HỌC
+---------------
+1. Nhấn "Lịch học" ở menu bên trái
+2. Chọn tuần muốn xem (mũi tên trái/phải)
+3. Xem các buổi học theo từng ngày
+4. Nhấn vào buổi học để xem chi tiết
+
+G. CẬP NHẬT HỒ SƠ
+-----------------
+1. Nhấn "Hồ sơ" ở menu bên trái
+2. Có thể cập nhật:
+   - Họ tên
+   - Số điện thoại
+   - Ảnh đại diện
+3. Nhấn "Lưu thay đổi"
+
+================================================================================
+                     3. DÀNH CHO GIẢNG VIÊN (TEACHER)
+================================================================================
+
+Giảng viên có tất cả quyền của học viên, cộng thêm các quyền sau:
+
+A. QUẢN LÝ LỚP HỌC
+------------------
+1. Xem danh sách lớp mình phụ trách
+2. Thêm tài liệu/module vào lớp
+3. Tạo bài tập và bài kiểm tra
+4. Chấm điểm bài tập
+
+B. THÊM MODULE/TÀI LIỆU
+-----------------------
+1. Vào lớp học của bạn
+2. Tab "Khóa học" → Nhấn "Thêm Module"
+3. Nhập tên module và mô tả
+4. Nhấn "Lưu"
+5. Để thêm tài liệu vào module:
+   - Nhấn nút "+" bên cạnh module
+   - Chọn file từ máy tính
+   - Đợi upload hoàn tất
+
+C. TẠO BÀI TẬP MỚI
+------------------
+1. Vào lớp học → Tab "Bài tập"
+2. Nhấn nút "Tạo bài tập"
+3. Điền thông tin:
+   - Tiêu đề bài tập
+   - Mô tả/yêu cầu
+   - Hạn nộp (chọn ngày giờ)
+   - Điểm tối đa
+4. Nhấn "Tạo"
+
+D. TẠO BÀI KIỂM TRA (QUIZ)
+--------------------------
+1. Vào lớp học → Tab "Bài kiểm tra"
+2. Nhấn "Tạo Quiz"
+3. Nhập thông tin cơ bản:
+   - Tiêu đề quiz
+   - Mô tả
+   - Thời gian làm bài (phút)
+4. Thêm câu hỏi:
+   - Nhấn "Thêm câu hỏi"
+   - Nhập nội dung câu hỏi
+   - Nhập các đáp án (A, B, C, D)
+   - Chọn đáp án đúng
+   - Nhấn "Lưu câu hỏi"
+5. Lặp lại bước 4 cho các câu hỏi khác
+6. Nhấn "Lưu Quiz"
+
+E. CHẤM ĐIỂM BÀI TẬP
+--------------------
+1. Vào lớp học → Tab "Bài tập"
+2. Nhấn vào bài tập muốn chấm
+3. Xem danh sách học viên đã nộp
+4. Nhấn vào tên học viên để xem bài
+5. Tải về file bài làm để xem
+6. Nhập điểm và nhận xét
+7. Nhấn "Lưu điểm"
+
+F. TẠO LỊCH HỌC
+---------------
+1. Nhấn "Lịch học" ở menu
+2. Nhấn "Thêm buổi học"
+3. Điền thông tin:
+   - Chọn lớp
+   - Tiêu đề buổi học
+   - Ngày và giờ bắt đầu
+   - Ngày và giờ kết thúc
+   - Địa điểm/link học online
+4. Nhấn "Lưu"
+
+================================================================================
+                   4. DÀNH CHO QUẢN TRỊ VIÊN (ADMIN)
+================================================================================
+
+Admin có tất cả quyền của Giảng viên, cộng thêm các quyền quản trị hệ thống:
+
+A. TRUY CẬP TRANG QUẢN TRỊ
+--------------------------
+1. Đăng nhập bằng tài khoản Admin
+2. Nhấn "Quản trị" ở menu bên trái
+3. Bạn sẽ thấy Dashboard quản trị với các thống kê
+
+B. QUẢN LÝ NGƯỜI DÙNG
+---------------------
+1. Vào "Quản trị" → "Người dùng"
+2. Xem danh sách tất cả người dùng
+
+Tạo người dùng mới:
+- Nhấn "Thêm người dùng"
+- Nhập: Họ tên, Email, Mật khẩu
+- Chọn vai trò: Student, Teacher, hoặc Admin
+- Nhấn "Tạo"
+
+Chỉnh sửa người dùng:
+- Nhấn nút "Sửa" (biểu tượng bút chì)
+- Thay đổi thông tin cần thiết
+- Nhấn "Lưu"
+
+Xóa người dùng:
+- Nhấn nút "Xóa" (biểu tượng thùng rác)
+- Xác nhận xóa
+- LƯU Ý: Không thể hoàn tác!
+
+C. QUẢN LÝ LỚP HỌC
+------------------
+1. Vào "Quản trị" → "Lớp học"
+2. Xem danh sách tất cả lớp học
+
+Tạo lớp học mới:
+- Nhấn "Tạo lớp"
+- Nhập: Tên lớp, Mô tả
+- Chọn Giảng viên phụ trách
+- Nhấn "Tạo"
+
+Thêm học viên vào lớp:
+- Nhấn vào lớp cần quản lý
+- Nhấn "Thêm học viên"
+- Tìm và chọn học viên
+- Nhấn "Thêm"
+
+Xóa lớp học:
+- Nhấn nút "Xóa" bên cạnh lớp
+- Xác nhận xóa
+- LƯU Ý: Tất cả dữ liệu của lớp sẽ bị xóa!
+
+D. XEM THỐNG KÊ
+---------------
+Trang Dashboard quản trị hiển thị:
+- Tổng số người dùng (theo vai trò)
+- Tổng số lớp học
+- Số bài tập và quiz
+- Hoạt động gần đây
+
+================================================================================
+                        5. CÂU HỎI THƯỜNG GẶP
+================================================================================
+
+HỎI: Tôi quên mật khẩu, phải làm sao?
+ĐÁP: Liên hệ Quản trị viên để được cấp lại mật khẩu mới.
+
+HỎI: Tôi không thấy lớp học của mình?
+ĐÁP: Có thể bạn chưa được thêm vào lớp. Liên hệ Giảng viên hoặc Admin.
+
+HỎI: Tôi nộp bài nhưng không thấy xác nhận?
+ĐÁP: Kiểm tra lại kết nối mạng và thử nộp lại. Nếu vẫn lỗi, liên hệ hỗ trợ.
+
+HỎI: File tôi upload không được chấp nhận?
+ĐÁP: Kiểm tra định dạng file (PDF, DOC, DOCX) và kích thước (tối đa 10MB).
+
+HỎI: Điểm quiz của tôi bị sai?
+ĐÁP: Điểm được tính tự động. Nếu có thắc mắc, liên hệ Giảng viên.
+
+HỎI: Tôi muốn đổi email đăng nhập?
+ĐÁP: Liên hệ Quản trị viên để được hỗ trợ.
+
+HỎI: Làm sao để xem điểm tổng kết?
+ĐÁP: Vào từng bài tập/quiz trong lớp để xem điểm chi tiết.
+
+HỎI: Tôi có thể truy cập trên điện thoại không?
+ĐÁP: Có, website được tối ưu cho cả máy tính và điện thoại.
+
+================================================================================
+                          6. LIÊN HỆ HỖ TRỢ
+================================================================================
+
+Nếu bạn gặp vấn đề khi sử dụng hệ thống, vui lòng liên hệ:
+
+   Email hỗ trợ: support@nls.studio
+   Hotline: (số điện thoại hỗ trợ)
+   
+   Giờ hỗ trợ: 8:00 - 17:00 (Thứ 2 - Thứ 6)
+
+================================================================================
+
+                    Cảm ơn bạn đã sử dụng NLS Studio!
+                         © 2025 NLS Studio
+
+================================================================================
