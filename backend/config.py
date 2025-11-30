@@ -19,11 +19,6 @@ class Config:
     MONGODB_URI = os.getenv('MONGODB_URI', 'mongodb://localhost:27017')
     MONGODB_DB_NAME = os.getenv('MONGODB_DB_NAME', 'nls_studio_lms')
     
-    # Clerk Authentication
-    CLERK_SECRET_KEY = os.getenv('CLERK_SECRET_KEY', '')
-    CLERK_PUBLISHABLE_KEY = os.getenv('CLERK_PUBLISHABLE_KEY', '')
-    CLERK_JWT_ISSUER = os.getenv('CLERK_JWT_ISSUER', '')
-    
     # Cloudinary
     CLOUDINARY_CLOUD_NAME = os.getenv('CLOUDINARY_CLOUD_NAME', '')
     CLOUDINARY_API_KEY = os.getenv('CLOUDINARY_API_KEY', '')

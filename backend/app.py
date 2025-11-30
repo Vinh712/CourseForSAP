@@ -17,6 +17,7 @@ from routes.schedule_routes import schedule_bp
 from routes.upload_routes import upload_bp
 from routes.admin_routes import admin_bp
 from routes.quiz_routes import quiz_bp
+from routes.problem_routes import problem_bp
 
 
 def create_app():
@@ -47,6 +48,7 @@ def create_app():
     app.register_blueprint(upload_bp, url_prefix='/api/upload')
     app.register_blueprint(admin_bp, url_prefix='/api/admin')
     app.register_blueprint(quiz_bp, url_prefix='/api/quizzes')
+    app.register_blueprint(problem_bp, url_prefix='/api/problems')
     
     @app.route('/api/health')
     def health_check():

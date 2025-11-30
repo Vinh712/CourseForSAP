@@ -202,3 +202,37 @@ def create_media_file_schema(user_id, url, public_id, **kwargs):
         'folder': kwargs.get('folder', 'general'),
         'created_at': datetime.utcnow()
     }
+
+
+def create_problem_schema(title, created_by, **kwargs):
+    """Problem document schema for coding/assignment problems"""
+    return {
+        '_id': ObjectId(),
+        'title': title,
+        'description': kwargs.get('description', ''),
+        'grading_criteria': kwargs.get('grading_criteria', ''),
+        'max_score': kwargs.get('max_score', 100),
+        'difficulty': kwargs.get('difficulty', 'medium'),  # easy, medium, hard
+        'tags': kwargs.get('tags', []),
+        'created_by': created_by,
+        'is_published': kwargs.get('is_published', True),
+        'created_at': datetime.utcnow(),
+        'updated_at': datetime.utcnow()
+    }
+
+
+def create_problem_submission_schema(problem_id, user_id, student_name, **kwargs):
+    """Problem submission document schema"""
+    return {
+        '_id': ObjectId(),
+        'problem_id': problem_id,
+        'user_id': user_id,
+        'student_name': student_name,
+        'submission_text': kwargs.get('submission_text', ''),
+        'language': kwargs.get('language', 'python'),  # python, javascript, java, etc.
+        'status': 'pending',  # pending, grading, graded, error
+        'score': None,
+        'feedback': None,
+        'graded_at': None,
+        'submitted_at': datetime.utcnow()
+    }

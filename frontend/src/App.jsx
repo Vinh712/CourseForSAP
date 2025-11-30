@@ -16,6 +16,9 @@ import AdminClasses from './pages/AdminClasses'
 import CreateAssignment from './pages/CreateAssignment'
 import TakeQuiz from './pages/TakeQuiz'
 import QuizResults from './pages/QuizResults'
+import Problems from './pages/Problems'
+import ProblemDetail from './pages/ProblemDetail'
+import CreateProblem from './pages/CreateProblem'
 
 // Protected route wrapper
 function ProtectedRoute({ children }) {
@@ -72,6 +75,10 @@ export default function App() {
           <Route path="assignments/:assignmentId" element={<AssignmentDetail />} />
           <Route path="quizzes/:quizId" element={<TakeQuiz />} />
           <Route path="quizzes/:quizId/results" element={<QuizResults />} />
+          <Route path="problems" element={<Problems />} />
+          <Route path="problems/create" element={<AdminRoute><CreateProblem /></AdminRoute>} />
+          <Route path="problems/:problemId" element={<ProblemDetail />} />
+          <Route path="problems/:problemId/edit" element={<AdminRoute><CreateProblem /></AdminRoute>} />
           <Route path="schedule" element={<Schedule />} />
           <Route path="profile" element={<Profile />} />
           {/* Admin Routes */}

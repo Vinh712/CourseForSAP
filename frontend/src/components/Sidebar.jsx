@@ -13,7 +13,8 @@ import {
   Sparkles,
   Shield,
   Users,
-  Zap
+  Zap,
+  Code2
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
@@ -26,6 +27,7 @@ const baseNavItems = [
   { path: '/', icon: LayoutDashboard, label: 'Dashboard', roles: ['student', 'teacher', 'admin'] },
   { path: '/classes', icon: BookOpen, label: 'Classes', roles: ['student', 'teacher', 'admin'] },
   { path: '/assignments', icon: FileText, label: 'Assignments', roles: ['student', 'teacher', 'admin'] },
+  { path: '/problems', icon: Code2, label: 'AI Teacher', roles: ['student', 'teacher', 'admin'] },
   { path: '/schedule', icon: Calendar, label: 'Schedule', roles: ['student', 'teacher', 'admin'] },
 ]
 
