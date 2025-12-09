@@ -40,6 +40,8 @@ export default function AssignmentDetail() {
         
         if (data.my_submission) {
           setSubmissionContent(data.my_submission.content || '')
+          // Load existing attachments for resubmit
+          setSubmissionFiles(data.my_submission.attachments || [])
         }
       } catch (error) {
         console.error('Failed to load assignment:', error)

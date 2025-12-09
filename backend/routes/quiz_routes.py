@@ -80,15 +80,31 @@ def get_quiz(quiz_id):
     
     # For students taking quiz, hide correct answers
     if not is_teacher:
-        # Check if already submitted
-        submission = db.quiz_submissions.find_one({
+        # Check submission count and best score
+        submissions = list(db.quiz_submissions.find({
             'quiz_id': quiz_id,
             'user_id': g.user_id
-        })
-        if submission:
+        }).sort('score', -1))
+        
+        max_attempts = quiz.get('max_attempts', 1)
+        attempts_used = len(submissions)
+        
+        quiz['max_attempts'] = max_attempts
+        quiz['attempts_used'] = attempts_used
+        quiz['can_retake'] = attempts_used < max_attempts
+        
+        if submissions:
+            best_submission = submissions[0]  # Highest score
             quiz['already_submitted'] = True
-            quiz['submission_score'] = submission.get('score')
-            quiz['submission_passed'] = submission.get('passed')
+            quiz['submission_score'] = best_submission.get('score')
+            quiz['submission_passed'] = best_submission.get('passed')
+            quiz['best_score'] = best_submission.get('score')
+            quiz['all_attempts'] = [{
+                'attempt': s.get('attempt_number', i+1),
+                'score': s.get('score'),
+                'passed': s.get('passed'),
+                'completed_at': s.get('completed_at')
+            } for i, s in enumerate(submissions)]
         
         # Hide correct answers
         for q in quiz.get('questions', []):
@@ -120,13 +136,14 @@ def create_quiz(class_id):
         return jsonify({'error': 'Quiz title is required'}), 400
     
     # Create quiz document
-    # Frontend sends: {title, description, time_limit, passing_score, questions: [{question, options: [], correct_answer: 0}]}
+    # Frontend sends: {title, description, time_limit, passing_score, max_attempts, questions: [{question, options: [], correct_answer: 0}]}
     quiz_data = {
         'class_id': class_id,
         'title': data['title'],
         'description': data.get('description', ''),
         'time_limit': data.get('time_limit', 30),
         'passing_score': data.get('passing_score', 60),
+        'max_attempts': data.get('max_attempts', 1),  # Số lần nộp tối đa
         'questions': data.get('questions', []),
         'is_published': data.get('is_published', False),
         'created_by': g.user_id,
@@ -160,7 +177,7 @@ def update_quiz(quiz_id):
     if cls.get('teacher_id') != g.user_id and g.user_role != 'admin':
         return jsonify({'error': 'Only teachers can update quizzes'}), 403
     
-    allowed_fields = ['title', 'description', 'questions', 'time_limit', 'passing_score', 'is_published']
+    allowed_fields = ['title', 'description', 'questions', 'time_limit', 'passing_score', 'max_attempts', 'is_published']
     update_data = {k: v for k, v in data.items() if k in allowed_fields}
     update_data['updated_at'] = datetime.utcnow()
     
@@ -229,13 +246,19 @@ def submit_quiz(quiz_id):
     if not is_student and not is_teacher:
         return jsonify({'error': 'Access denied'}), 403
     
-    # Check if already submitted
-    existing = db.quiz_submissions.find_one({
+    # Check number of attempts
+    attempt_count = db.quiz_submissions.count_documents({
         'quiz_id': quiz_id,
         'user_id': g.user_id
     })
-    if existing:
-        return jsonify({'error': 'Quiz already submitted'}), 400
+    max_attempts = quiz.get('max_attempts', 1)
+    
+    if attempt_count >= max_attempts:
+        return jsonify({
+            'error': f'Đã hết số lần nộp ({max_attempts} lần)',
+            'attempts_used': attempt_count,
+            'max_attempts': max_attempts
+        }), 400
     
     # Grade the quiz
     questions = quiz.get('questions', [])
@@ -261,6 +284,7 @@ def submit_quiz(quiz_id):
         'correct_count': correct_count,
         'total_questions': total_questions,
         'passed': passed,
+        'attempt_number': attempt_count + 1,
         'completed_at': datetime.utcnow()
     }
     

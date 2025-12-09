@@ -115,7 +115,7 @@ def create_course(class_id):
         title=data['title'],
         description=data.get('description', ''),
         order=next_order,
-        is_published=data.get('is_published', False)
+        is_published=data.get('is_published', True)  # Default to published
     )
     
     result = db.courses.insert_one(course_data)

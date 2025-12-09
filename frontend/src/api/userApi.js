@@ -9,6 +9,13 @@ export const userApi = {
 
   // Sync profile after login
   syncProfile: (data) => axiosClient.post('/auth/profile/sync', data),
+
+  // Change password
+  changePassword: (currentPassword, newPassword) => 
+    axiosClient.post('/auth/change-password', { 
+      current_password: currentPassword, 
+      new_password: newPassword 
+    }),
 }
 
 export default userApi

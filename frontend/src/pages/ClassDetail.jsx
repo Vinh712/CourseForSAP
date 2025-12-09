@@ -89,6 +89,7 @@ export default function ClassDetail() {
     description: '',
     time_limit: 30,
     passing_score: 60,
+    max_attempts: 1,
     questions: [{ question: '', options: ['', '', '', ''], correct_answer: 0 }]
   })
 
@@ -241,6 +242,7 @@ export default function ClassDetail() {
         description: '',
         time_limit: 30,
         passing_score: 60,
+        max_attempts: 1,
         questions: [{ question: '', options: ['', '', '', ''], correct_answer: 0 }]
       })
     } catch (error) {
@@ -893,6 +895,17 @@ export default function ClassDetail() {
                   max={100}
                 />
               </div>
+            </div>
+
+            <div>
+              <Label className="text-gray-300">Số lần làm bài tối đa (0 = không giới hạn)</Label>
+              <Input
+                type="number"
+                value={newQuiz.max_attempts}
+                onChange={(e) => setNewQuiz({ ...newQuiz, max_attempts: parseInt(e.target.value) || 1 })}
+                className="mt-2"
+                min={0}
+              />
             </div>
 
             <Separator className="bg-white/10" />

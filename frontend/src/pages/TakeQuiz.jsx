@@ -71,6 +71,10 @@ export default function TakeQuiz() {
       const answersArray = quiz.questions.map((_, index) => answers[index] ?? -1)
       const data = await quizApi.submit(quizId, answersArray)
       setResult(data)
+      
+      // Reload quiz data to update can_retake and attempts_used
+      const updatedQuiz = await quizApi.getById(quizId)
+      setQuiz(updatedQuiz)
     } catch (error) {
       console.error('Failed to submit quiz:', error)
       alert('Failed to submit quiz. Please try again.')
@@ -170,6 +174,13 @@ export default function TakeQuiz() {
               </Card>
             </div>
 
+            {/* Attempt info */}
+            {quiz.max_attempts && (
+              <div className="text-center text-sm text-gray-400">
+                Lần làm bài: {result.attempt_number || quiz.attempts_used || 1} / {quiz.max_attempts === 0 ? '∞' : quiz.max_attempts}
+              </div>
+            )}
+
             <div className="flex gap-3">
               <Button 
                 variant="outline" 
@@ -178,7 +189,7 @@ export default function TakeQuiz() {
               >
                 Back to Class
               </Button>
-              {!result.passed && (
+              {!result.passed && quiz.can_retake !== false && (
                 <Button 
                   className="flex-1 bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:from-purple-600 hover:to-blue-600" 
                   onClick={() => {
@@ -191,6 +202,11 @@ export default function TakeQuiz() {
                 >
                   Try Again
                 </Button>
+              )}
+              {!result.passed && quiz.can_retake === false && (
+                <div className="flex-1 text-center text-red-400 text-sm py-2">
+                  Bạn đã hết lượt làm bài
+                </div>
               )}
             </div>
           </CardContent>
@@ -273,14 +289,27 @@ export default function TakeQuiz() {
               </div>
             </div>
 
+            {/* Attempt info */}
+            {quiz.max_attempts !== undefined && (
+              <div className="text-center p-4 bg-white/5 rounded-xl border border-white/10">
+                <div className="font-semibold text-white">
+                  Lần làm bài: {quiz.attempts_used || 0} / {quiz.max_attempts === 0 ? '∞' : quiz.max_attempts}
+                </div>
+                {quiz.can_retake === false && (
+                  <div className="text-sm text-red-400 mt-1">Bạn đã hết lượt làm bài</div>
+                )}
+              </div>
+            )}
+
             <Button 
               variant="gradient" 
               size="lg" 
               className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:from-purple-600 hover:to-blue-600 shadow-[0_0_20px_rgba(139,92,246,0.3)]"
               onClick={() => setHasStarted(true)}
+              disabled={quiz.can_retake === false}
             >
               <Sparkles className="w-5 h-5 mr-2" />
-              Start Quiz
+              {quiz.attempts_used > 0 ? 'Làm lại Quiz' : 'Start Quiz'}
             </Button>
           </CardContent>
         </Card>

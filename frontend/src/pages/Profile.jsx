@@ -12,7 +12,11 @@ import {
   Calendar,
   Clock,
   GraduationCap,
-  Loader2
+  Loader2,
+  Lock,
+  Eye,
+  EyeOff,
+  Key
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
@@ -24,8 +28,10 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import uploadApi from '@/api/uploadApi'
+import userApi from '@/api/userApi'
 import { useAuthStore } from '@/stores/authStore'
 import { getInitials, formatDate } from '@/lib/utils'
+import { toast } from 'sonner'
 
 export default function Profile() {
   const { user, isLoading: authLoading, updateProfile: updateAuthProfile } = useAuthStore()
@@ -47,6 +53,16 @@ export default function Profile() {
     totalHours: 0,
     streak: 0
   })
+
+  // Password change states
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  })
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [isChangingPassword, setIsChangingPassword] = useState(false)
 
   useEffect(() => {
     if (user) {
@@ -95,6 +111,35 @@ export default function Profile() {
       console.error('Failed to save profile:', error)
     } finally {
       setIsSaving(false)
+    }
+  }
+
+  const handleChangePassword = async () => {
+    if (!passwordForm.currentPassword || !passwordForm.newPassword) {
+      toast.error('Vui lòng nhập đầy đủ thông tin')
+      return
+    }
+
+    if (passwordForm.newPassword.length < 6) {
+      toast.error('Mật khẩu mới phải có ít nhất 6 ký tự')
+      return
+    }
+
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      toast.error('Mật khẩu xác nhận không khớp')
+      return
+    }
+
+    try {
+      setIsChangingPassword(true)
+      await userApi.changePassword(passwordForm.currentPassword, passwordForm.newPassword)
+      toast.success('Đổi mật khẩu thành công!')
+      setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' })
+    } catch (error) {
+      console.error('Failed to change password:', error)
+      toast.error(error.response?.data?.error || 'Đổi mật khẩu thất bại')
+    } finally {
+      setIsChangingPassword(false)
     }
   }
 
@@ -242,6 +287,10 @@ export default function Profile() {
           <TabsTrigger value="details" className="rounded-lg data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400 text-gray-400">
             Profile Details
           </TabsTrigger>
+          <TabsTrigger value="security" className="rounded-lg data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400 text-gray-400">
+            <Lock className="w-4 h-4 mr-1" />
+            Bảo mật
+          </TabsTrigger>
           <TabsTrigger value="preferences" className="rounded-lg data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-400 text-gray-400">
             Preferences
           </TabsTrigger>
@@ -341,6 +390,103 @@ export default function Profile() {
                   </Button>
                 </div>
               )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="security">
+          <Card className="glass-card border-0">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <Key className="w-5 h-5 text-purple-400" />
+                Đổi mật khẩu
+              </CardTitle>
+              <CardDescription className="text-gray-400">
+                Cập nhật mật khẩu để bảo vệ tài khoản của bạn
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-4 max-w-md">
+                <div className="space-y-2">
+                  <Label htmlFor="currentPassword" className="text-gray-300">
+                    Mật khẩu hiện tại
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="currentPassword"
+                      type={showCurrentPassword ? 'text' : 'password'}
+                      value={passwordForm.currentPassword}
+                      onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
+                      placeholder="Nhập mật khẩu hiện tại"
+                      className="pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+                    >
+                      {showCurrentPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="newPassword" className="text-gray-300">
+                    Mật khẩu mới
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="newPassword"
+                      type={showNewPassword ? 'text' : 'password'}
+                      value={passwordForm.newPassword}
+                      onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
+                      placeholder="Nhập mật khẩu mới (tối thiểu 6 ký tự)"
+                      className="pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowNewPassword(!showNewPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+                    >
+                      {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="confirmPassword" className="text-gray-300">
+                    Xác nhận mật khẩu mới
+                  </Label>
+                  <Input
+                    id="confirmPassword"
+                    type="password"
+                    value={passwordForm.confirmPassword}
+                    onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
+                    placeholder="Nhập lại mật khẩu mới"
+                  />
+                  {passwordForm.confirmPassword && passwordForm.newPassword !== passwordForm.confirmPassword && (
+                    <p className="text-xs text-red-400">Mật khẩu xác nhận không khớp</p>
+                  )}
+                </div>
+
+                <Button 
+                  onClick={handleChangePassword} 
+                  disabled={isChangingPassword || !passwordForm.currentPassword || !passwordForm.newPassword || passwordForm.newPassword !== passwordForm.confirmPassword}
+                  className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600"
+                >
+                  {isChangingPassword ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Đang đổi mật khẩu...
+                    </>
+                  ) : (
+                    <>
+                      <Lock className="w-4 h-4 mr-2" />
+                      Đổi mật khẩu
+                    </>
+                  )}
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
