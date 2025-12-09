@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
+import { Toaster } from 'sonner'
 import useAuthStore from './stores/authStore'
 import AppLayout from './components/AppLayout'
 import Login from './pages/Login'
@@ -56,38 +57,52 @@ function AdminRoute({ children }) {
 
 export default function App() {
   return (
-    <AnimatePresence mode="wait">
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <AppLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<Dashboard />} />
-          <Route path="classes" element={<Classes />} />
-          <Route path="classes/:classId" element={<ClassDetail />} />
-          <Route path="classes/:classId/assignments/new" element={<CreateAssignment />} />
-          <Route path="assignments" element={<Assignments />} />
-          <Route path="assignments/:assignmentId" element={<AssignmentDetail />} />
-          <Route path="quizzes/:quizId" element={<TakeQuiz />} />
-          <Route path="quizzes/:quizId/results" element={<QuizResults />} />
-          <Route path="problems" element={<Problems />} />
-          <Route path="problems/create" element={<AdminRoute><CreateProblem /></AdminRoute>} />
-          <Route path="problems/:problemId" element={<ProblemDetail />} />
-          <Route path="problems/:problemId/edit" element={<AdminRoute><CreateProblem /></AdminRoute>} />
-          <Route path="schedule" element={<Schedule />} />
-          <Route path="profile" element={<Profile />} />
-          {/* Admin Routes */}
-          <Route path="admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
-          <Route path="admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
-          <Route path="admin/classes" element={<AdminRoute><AdminClasses /></AdminRoute>} />
-        </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </AnimatePresence>
+    <>
+      <Toaster 
+        position="top-right" 
+        richColors 
+        theme="dark"
+        toastOptions={{
+          style: {
+            background: 'rgba(15, 17, 24, 0.9)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+          },
+        }}
+      />
+      <AnimatePresence mode="wait">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Dashboard />} />
+            <Route path="classes" element={<Classes />} />
+            <Route path="classes/:classId" element={<ClassDetail />} />
+            <Route path="classes/:classId/assignments/new" element={<CreateAssignment />} />
+            <Route path="assignments" element={<Assignments />} />
+            <Route path="assignments/:assignmentId" element={<AssignmentDetail />} />
+            <Route path="quizzes/:quizId" element={<TakeQuiz />} />
+            <Route path="quizzes/:quizId/results" element={<QuizResults />} />
+            <Route path="problems" element={<Problems />} />
+            <Route path="problems/create" element={<AdminRoute><CreateProblem /></AdminRoute>} />
+            <Route path="problems/:problemId" element={<ProblemDetail />} />
+            <Route path="problems/:problemId/edit" element={<AdminRoute><CreateProblem /></AdminRoute>} />
+            <Route path="schedule" element={<Schedule />} />
+            <Route path="profile" element={<Profile />} />
+            {/* Admin Routes */}
+            <Route path="admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+            <Route path="admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
+            <Route path="admin/classes" element={<AdminRoute><AdminClasses /></AdminRoute>} />
+          </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AnimatePresence>
+    </>
   )
 }

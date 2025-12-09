@@ -301,6 +301,47 @@ export default function TakeQuiz() {
               </div>
             )}
 
+            {/* Submission History */}
+            {quiz.all_attempts && quiz.all_attempts.length > 0 && (
+              <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
+                <div className="p-4 border-b border-white/10">
+                  <h3 className="font-semibold text-white flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-purple-400" />
+                    Lịch sử làm bài
+                  </h3>
+                </div>
+                <div className="divide-y divide-white/5">
+                  {quiz.all_attempts.map((attempt, idx) => (
+                    <div key={idx} className="p-4 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-medium ${
+                          attempt.passed 
+                            ? 'bg-green-500/20 text-green-400' 
+                            : 'bg-red-500/20 text-red-400'
+                        }`}>
+                          #{attempt.attempt || idx + 1}
+                        </div>
+                        <div>
+                          <div className="text-white font-medium">
+                            Điểm: {attempt.score}%
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            {attempt.completed_at && new Date(attempt.completed_at).toLocaleString('vi-VN')}
+                          </div>
+                        </div>
+                      </div>
+                      <Badge className={attempt.passed 
+                        ? 'bg-green-500/20 text-green-400 border-0' 
+                        : 'bg-red-500/20 text-red-400 border-0'
+                      }>
+                        {attempt.passed ? 'Đạt' : 'Chưa đạt'}
+                      </Badge>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <Button 
               variant="gradient" 
               size="lg" 
